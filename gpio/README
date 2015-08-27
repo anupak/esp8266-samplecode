@@ -1,0 +1,1 @@
+This example detects button push on GPIO0 and displays a message on the connected serial session
