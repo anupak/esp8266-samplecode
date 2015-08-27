@@ -43,10 +43,11 @@ LOCAL void  gpio_intr_handler(int *dummy)
         // disable interrupt for GPIO0
         gpio_pin_intr_state_set(GPIO_ID_PIN(0), GPIO_PIN_INTR_DISABLE);
 
-
         // Do something, for example, increment whatyouwant indirectly
+        // Currently holds the number of times the button was pressed
         (*dummy)++;
 
+        // Print a debug message
 		os_printf("Button Pushed %d times\r\n", *dummy);
 
         //clear interrupt status for GPIO0
