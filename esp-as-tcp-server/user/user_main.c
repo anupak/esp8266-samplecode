@@ -34,15 +34,12 @@ static void ICACHE_FLASH_ATTR tcp_client_sent_cb(void *arg)
 {
     struct espconn *pespconn = (struct espconn *)arg;
     os_printf("tcp_client_sent_cb(): Data sent to client\n");
-    //espconn_disconnect(pespconn);
 }
 
 static void ICACHE_FLASH_ATTR tcp_client_discon_cb(void *arg)
 {
     os_printf("tcp_client_discon_cb(): client disconnected\n");
     struct espconn *pespconn = (struct espconn *)arg;
-    //os_free(pespconn->proto.tcp);
-    // os_free(pespconn);
 }
 
 /* Called wen a client connects to server */
@@ -106,7 +103,6 @@ static void ICACHE_FLASH_ATTR user_procTask(os_event_t *events)
 /* Callback called when the connection state of the module with an Access Point changes */
 void wifi_handle_event_cb(System_Event_t *evt)
 {
-    //  os_printf("event %x\n", evt->event);
     os_printf("wifi_handle_event_cb: ");
     switch (evt->event)
     {
@@ -124,7 +120,8 @@ void wifi_handle_event_cb(System_Event_t *evt)
 
     case EVENT_STAMODE_GOT_IP:
         os_printf("ip:" IPSTR ",mask:" IPSTR ",gw:" IPSTR, IP2STR(&evt->event_info.got_ip.ip), IP2STR(&evt->event_info.got_ip.mask), IP2STR(&evt->event_info.got_ip.gw));
-        // Post a null message to Task with priority 0, to wake it up to connect and send test data
+
+        // Post a Server Start message as the IP has been acquired to Task with priority 0
         system_os_post(user_procTaskPrio, SIG_START_SERVER, 0 );
         break;
 
