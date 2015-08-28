@@ -1,0 +1,5 @@
+This example is simple TCP server. The ESP acts as a TCP server on port 7777. It accepts the connection from clients. It responds back with a hello message. The clinet received the message and sends a Thank You back. Post which the server will diconnect the client.
+
+Note: the new_uart.c has been moved to driver directory, and the os_putcs are being buffered as the messages are much longer :-)
+
+the client_test folder contains the client used to test it. I have built and used this on a fedora 22 (I think it will work on most unixes).
