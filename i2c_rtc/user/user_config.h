@@ -1,2 +1,2 @@
-#define SSID			"ADSNet24g"
-#define PASSWORD		"WhereAreyouAnup"
+#define SSID			"YourSSID"
+#define PASSWORD		"yourPassword"
