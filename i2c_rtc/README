@@ -1,0 +1,9 @@
+The example code implements a inteface to DS3231/DS1307 using the i2c_master apis (provided by SDK).
+
+During the testing, I realised the various time formats being followed by RTC, SNTP and the time.h APIs. 
+
+To reduce my programming errors I simplified to epoch time. The APIs are no conistent across the SNTP and RTC. I also implemented a sync between SNTP and RTC to correct for RTC drift.
+
+Code is tested on ESP-01 (and DS3231 module), SCL <-> GPIO-0, SDA <-> GPIO2.
+
+Please let me know if you detect errors.
