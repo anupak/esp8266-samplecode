@@ -1,0 +1,46 @@
+This is a test for MQTT based alarm application. The ESP01 is wired as following
+
+GPIO-2 = LED (can be connected to a light, noisemaker etc)
+GPIO-0 = switch (used for acknowledgement of alarm)
+
+There are 2 supported alarms, 
+	1) Basic alarm (times out in n seconds, or the button push), JSON definition of the alarm is as follows
+		
+			{
+				alarm {
+					"status" : "on",
+					"description" : "[String of your choice]",
+					"timeout": n (defaults to 10 seconds if not specified)
+				}
+			}
+
+	2) Advanced alarm (which requires the user to acknowledge the alarm by a button puch, and this is confirmed to the sever)
+
+			{
+				alarm {
+					"status" : "on",
+					"description" : "[String of your choice]",
+					"acktopic": "[Topic where the server is listening for acknowledgement]"
+				}
+			}
+			
+			Note: timeout has no significance , and will be ignored in advance alarms if specified
+
+Mosquitto Commands:
+	Basic Alarm:
+		mosquitto_pub -t "/esp8266/alarms" -m "{\"alarm\": { \"status\":\"on\", \"description\":\"Test Alarm\", \"timeout\":5}}"
+
+	Advanced Alarm:
+		mosquitto_pub -t "/esp8266/alarms" -m "{\"alarm\": { \"status\":\"on\", \"description\":\"Test Alarm\", \"timeout\":15, \"acktopic\":\"/hive/alarmserver\"}}"
+
+
+Acknowledgements:
+	Tuan PM's ESP MQTT 					(https://github.com/tuanpmt/esp_mqtt)
+	Jan Penninkhof's ESP MQTT Switch 	(https://github.com/jpenninkhof/esp_mqtt_switch)
+
+
+NOTE:
+	Currently the client application to generate the alarms automatically is under development. Once completed will be updated as host code
+	MQTT Broker has _no_ security whosoever 
+	Mosquitto was running within the lan (and provided clients were used to Publish test alarms, Subscribe to acknowledgements)
+	user flash area is used for saving configuration (pervious data will be wiped)
