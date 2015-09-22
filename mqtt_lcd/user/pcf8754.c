@@ -1,0 +1,40 @@
+#include "pcf8754.h"
+
+
+uint8_t pcf8754_i2c_read_byte(uint8_t *byte)
+{
+    uint8_t result;
+
+    i2c_master_start();                     // Start I2C request
+
+    i2c_master_writeByte(LCD_READ_BYTE);     // PCF8750 address + W bit
+    result = i2c_master_checkAck();
+    if (!result) return 0;
+
+    //Now send the address of required register
+    *byte = i2c_master_readByte();
+    i2c_master_send_nack();
+
+    i2c_master_stop();
+    return 1;
+}
+
+uint8_t pcf8754_i2c_write_byte(uint8_t byte)
+{
+    uint8_t result;
+
+    i2c_master_start();                     // Start I2C request
+
+    i2c_master_writeByte(LCD_WRITE_BYTE);     // PCF8750 address + W bit
+    result = i2c_master_checkAck();
+    if (!result) return 0;
+
+    //Now send the address of required register
+    i2c_master_writeByte(byte);
+    result = i2c_master_checkAck();
+    if (!result) return 0;
+
+    i2c_master_stop();
+    return 1;
+}
+
