@@ -1,0 +1,3 @@
+The code is to test adding additional low speed inputs to ESP-01 (for button press) etc.
+
+The code needs esp8266 SDK to be setup, and BUILD_AREA to be exported before compilation (see blog for more information). 
