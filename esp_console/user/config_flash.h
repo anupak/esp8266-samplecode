@@ -18,13 +18,21 @@ typedef struct
 
     // Length of the structure, since this is a evolving library, the variant may change
     // hence used for verification
-    uint8_t     length;
+    uint16_t     length;
 
     /* Below variables are specific to my code */
     uint8_t     ssid[32];       // SSID of the AP to connect to
     uint8_t     password[64];   // Password of the nwtork
     uint8_t     auto_connect;   // Should we auto connect
-    uint8_t     dummy[68];      // Dummy data can be replaced by customization
+
+    /* Specific to MQTT */
+   	uint8_t     device_id[16];
+	uint8_t     mqtt_host[64];
+	uint32_t    mqtt_port;
+	uint8_t     mqtt_user[32];
+	uint8_t     mqtt_pass[32];
+	uint32_t    mqtt_keepalive;
+	uint8_t     security;
 } sysconfig_t, *sysconfig_p;
 
 int config_load(int version, sysconfig_p config);
