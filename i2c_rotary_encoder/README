@@ -1,0 +1,3 @@
+This is the accompnying code to my post at http://fogetfullbrain.blogspot.in/2015/08/uart-sending-and-receiving-data-using.html
+
+The code is by no means complete and is basically I hacked to understand the UARTs on esp8266. The code needs esp8266 SDK to be setup, and BUILD_AREA to be exported before compilation (see blog for more information). 
