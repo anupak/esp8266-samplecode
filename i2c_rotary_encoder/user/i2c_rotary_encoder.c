@@ -16,6 +16,7 @@ uint8_t decode_rotary_encoder(uint8_t byte, encoder_direction_t *direction, uint
     *button = (input & (1<< ROTARY_ENCODER_BUTTON)) >> ROTARY_ENCODER_BUTTON;
     if (*button) ret += 1;
 
+    /* Sequence CW: 1320, CCW:2310 */
     bit1 = (input & (1<< ROTARY_ENCODER_PIN1)) >> ROTARY_ENCODER_PIN1;
     bit2 = (input & (1<< ROTARY_ENCODER_PIN2)) >> ROTARY_ENCODER_PIN2;
 
@@ -43,17 +44,7 @@ uint8_t decode_rotary_encoder(uint8_t byte, encoder_direction_t *direction, uint
         ret += 1;
         //counter = 0;
     }
-    /* Sequence CW: 1320, CCW:2310 */
 
-    //os_printf("Rotary Encode: %d ", temp);
-/*
-        if ((bit1 != 0) && (bit2 != 0))
-        {
-        }
-        else
-*/
-
-    //os_printf(" [Button: %d] ", *button);
 
 
     return (ret);
