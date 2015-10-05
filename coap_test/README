@@ -1,0 +1,11 @@
+This is a sample COAP test server. The server exports 2 lights (light1 and light2), which can be turned on/off. The light1 maps to gpio-0, and light2 to gpio-2.
+
+To test, I used copper plugin on firefox.
+
+The COAP library itself is based on microcoap (https://github.com/1248/microcoap). GIT location is https://github.com/1248/microcoap.git.
+
+I have done changes to the codebase to allow it to compile and run on esp8266. The notable changes are addition of a strncat function. and mapping to sdk functions. I also changes the header file includes to map to sdk. Since I am testing this out, I have not yet submitted the code back to  1248.io's repo yet. I also removed the main-posix.c code, and integrated the part into the user_main.c. The buffers were huge, I reduced their sizes as well. 
+
+Please feel free to check the code.  You will need to modify the endpoints code (./modules/microcoap/endpoints.c) if you want to change the functionalities. 
+
+As usual feedback is welcome.
